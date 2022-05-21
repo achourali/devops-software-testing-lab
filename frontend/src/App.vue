@@ -2,16 +2,20 @@
   <div>
     <img alt="Vue logo" src="./assets/logo.png" />
     <addTask />
+    <tasksList/>
+
   </div>
 </template>
 
 <script>
 import addTask from "./components/addTask.vue";
+import tasksList from "./components/tasksList.vue"
 
 export default {
   name: "App",
   components: {
     addTask,
+    tasksList,
   },
 };
 </script>
