@@ -50,12 +50,16 @@ export class AppService {
       throw new BadRequestException('id not found')
     }
 
+    this.socketioService.emitEvent('tasksUpdated')
+
     return taskToUpdate;
   }
 
   delete(id: number) {
     const index = this.tasks.findIndex((value) => value.id == id);
     if(index==-1) throw new BadRequestException('id not found')
+
+    this.socketioService.emitEvent('tasksUpdated')
     return this.tasks.splice(index, 1)[0];
   }
 }
