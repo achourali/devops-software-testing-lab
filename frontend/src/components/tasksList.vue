@@ -30,7 +30,7 @@ export default {
     getTasks() {
       axios
         .get(this.backURL + "/tasks")
-        .then((responce) => (this.tasks = responce.data));
+        .then((responce) => (this.tasks = responce.data.reverse()));
     },
   },
   components: {
