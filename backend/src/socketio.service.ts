@@ -5,7 +5,7 @@ import { Server } from 'socket.io';
 
 @Injectable()
 export class SocketioService {
-  private io;
+  private io:Server;
 
   constructor() {
     const httpServer = createServer();
@@ -21,5 +21,9 @@ export class SocketioService {
     });
 
     httpServer.listen(3001);
+  }
+
+  emitEvent(event:string){
+    this.io.emit(event)
   }
 }

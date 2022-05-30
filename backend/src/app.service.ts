@@ -36,7 +36,7 @@ export class AppService {
     task.completed=false;
 
     this.tasks.push(task);
-
+    this.socketioService.emitEvent('tasksUpdated')
     return task;
   }
 
