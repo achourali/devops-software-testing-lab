@@ -1,7 +1,9 @@
 <template>
   <div>
-    add task : <input placeholder="task" v-model="description"/>
-    <button type="button" @click="addTask">Add</button>
+    <div class="ui action input">
+      <input type="text" placeholder="Task description" v-model="description" />
+      <button class="ui button" @click="addTask">Add task</button>
+    </div>
   </div>
 </template>
 <script>
@@ -15,8 +17,10 @@ export default {
   methods: {
     addTask() {
       axios
-        .post(this.backURL + "/task",{description:this.description})
-        .then(() =>{ this.description=""});
+        .post(this.backURL + "/task", { description: this.description })
+        .then(() => {
+          this.description = "";
+        });
     },
   },
 };

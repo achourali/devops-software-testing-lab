@@ -1,6 +1,9 @@
 <template>
   <div>
-    tasks: <taskCard v-for="task in tasks" :key="task.id" :task="task" />
+    <div class="ui center aligned segment">
+      <h2 class="ui header">Tasks</h2>
+      <taskCard v-for="task in tasks" :key="task.id" :task="task" />
+    </div>
   </div>
 </template>
 
@@ -16,7 +19,7 @@ export default {
     };
   },
   mounted() {
-    this.getTasks()
+    this.getTasks();
     const socket = io(this.socketioURL, {
       reconnectionDelayMax: 10000,
     });
