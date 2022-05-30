@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     this.getTasks()
-    const socket = io("ws://localhost:3001", {
+    const socket = io(this.socketioURL, {
       reconnectionDelayMax: 10000,
     });
 
