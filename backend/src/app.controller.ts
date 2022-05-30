@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { Task } from './entities/task';
 
@@ -36,5 +44,10 @@ export class AppController {
   @Delete('task/:id')
   async delete(@Param('id') id: number) {
     this.appService.delete(id);
+  }
+
+  @Get('freshStart')
+  freshStart() {
+    this.appService.freshStart();
   }
 }

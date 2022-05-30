@@ -1,13 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Task } from './entities/task';
-import {SocketioService} from './socketio.service'
+import { SocketioService } from './socketio.service';
 
 @Injectable()
 export class AppService {
-
-  constructor(private socketioService:SocketioService){
-  }
-
+  constructor(private socketioService: SocketioService) {}
 
   getHello(): string {
     return 'Hello World!';
@@ -33,10 +30,10 @@ export class AppService {
     }
 
     task.id = lastId + 1;
-    task.completed=false;
+    task.completed = false;
 
     this.tasks.push(task);
-    this.socketioService.emitEvent('tasksUpdated')
+    this.socketioService.emitEvent('tasksUpdated');
     return task;
   }
 
@@ -46,20 +43,24 @@ export class AppService {
     if (taskToUpdate) {
       taskToUpdate.description = task.description;
       taskToUpdate.completed = task.completed;
-    }else{
-      throw new BadRequestException('id not found')
+    } else {
+      throw new BadRequestException('id not found');
     }
 
-    this.socketioService.emitEvent('tasksUpdated')
+    this.socketioService.emitEvent('tasksUpdated');
 
     return taskToUpdate;
   }
 
   delete(id: number) {
     const index = this.tasks.findIndex((value) => value.id == id);
-    if(index==-1) throw new BadRequestException('id not found')
+    if (index == -1) throw new BadRequestException('id not found');
 
-    this.socketioService.emitEvent('tasksUpdated')
+    this.socketioService.emitEvent('tasksUpdated');
     return this.tasks.splice(index, 1)[0];
+  }
+
+  freshStart() {
+    this.tasks = [];
   }
 }
