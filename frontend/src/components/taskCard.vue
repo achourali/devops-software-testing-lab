@@ -3,6 +3,7 @@
     <div class="ui centered card">
       <div class="content">
         <div class="header">Task n° {{ this.task.id }}:</div>
+        
         <div class="description">
           {{ this.task.description }}
         </div>
@@ -15,9 +16,12 @@
         >
           mark as completed
         </div>
-        <div class="ui basic red button" v-else @click="uncompleted">
+        <div class="ui basic yellow button" v-else @click="uncompleted">
           mark as uncompleted
         </div>
+        <button class="ui right floated  icon red button" @click="remove">
+          <i class="trash icon"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -40,6 +44,10 @@ export default {
         completed: false,
       });
     },
+    remove(){
+      axios.delete(this.backURL + "/task/" + this.task.id);
+
+    }
   },
 };
 </script>
