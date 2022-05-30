@@ -1,8 +1,14 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Task } from './entities/task';
+import {SocketioService} from './socketio.service'
 
 @Injectable()
 export class AppService {
+
+  constructor(private socketioService:SocketioService){
+  }
+
+
   getHello(): string {
     return 'Hello World!';
   }
