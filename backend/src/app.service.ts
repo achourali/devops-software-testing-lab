@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Task } from './entities/task';
 
 @Injectable()
@@ -35,19 +35,21 @@ export class AppService {
   }
 
   update(task: Task) {
-    const taskArray = this.getById(task.id);
+    const taskToUpdate = this.getById(task.id);
 
-    if (taskArray) {
-      taskArray.description = task.description;
-      taskArray.completed = task.completed;
+    if (taskToUpdate) {
+      taskToUpdate.description = task.description;
+      taskToUpdate.completed = task.completed;
+    }else{
+      throw new BadRequestException('id not found')
     }
 
-    return taskArray;
+    return taskToUpdate;
   }
 
   delete(id: number) {
     const index = this.tasks.findIndex((value) => value.id == id);
-
-    this.tasks.splice(index, 1);
+    if(index==-1) throw new BadRequestException('id not found')
+    return this.tasks.splice(index, 1)[0];
   }
 }
