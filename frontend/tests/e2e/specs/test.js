@@ -6,11 +6,14 @@ describe("adding new tasks", () => {
 
     let tasks = [];
     //get initial tasks
-    cy.get(".ui.segment")
-      .find(".card")
-      .each(($el, index, $list) => {
-        tasks.push($el[0].querySelector(".description").textContent);
-      });
+    cy.get(".ui.segment").then(($segment) => {
+      if ($segment.find(".card").length > 0) {
+        $segment.find(".card").each(($el, index, $list) => {
+          tasks.push(index.querySelector(".description").textContent)
+        });
+      } 
+    }).then(()=>{
+
 
     //add new tasks
     let newTasks = ["task A", "task B"];
@@ -21,16 +24,22 @@ describe("adding new tasks", () => {
         cy.get("button").click();
       });
     });
-    cy.wait(500);
 
-    //check tasks
-    cy.get(".ui.segment")
-      .find(".card")
-      .each(($el, index, $list) => {
-        expect($el[0].querySelector(".description").textContent).to.equal(
-          tasks[index]
-        );
-      });
+    console.log(tasks)
+    cy.wait(500).then(() => {
+      //check tasks
+      cy.get(".ui.segment")
+        .find(".card")
+        .each(($el, index, $list) => {
+          expect($el[0].querySelector(".description").textContent).to.equal(
+            tasks[index]
+          );
+        });
+    });
+
+    })
+
+
   });
 });
 
