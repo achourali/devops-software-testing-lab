@@ -7,10 +7,9 @@ jobs:
     steps:
         - name: Check out repository code
           uses: actions/checkout@v3
-        - name: node environment
-          uses: actions/setup-node@v3
-            with:
-              node-version: "16"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
         - run: cd backend && npm install
 
 
