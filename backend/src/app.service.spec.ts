@@ -1,13 +1,14 @@
 import { BadRequestException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppService } from './app.service';
+import { SocketioService } from './socketio.service';
 
 describe('AppController', () => {
   let appService: AppService;
 
   beforeAll(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      providers: [AppService],
+      providers: [AppService,SocketioService],
     }).compile();
 
     appService = await app.get(AppService);
