@@ -11,8 +11,7 @@ jobs:
         with:
           node-version: "16"
       - run: cd backend && npm install && npm run test
-      - run: cd backend && npm run start &
-      - run: cd frontend && npm install && npm run test:e2e
+      - run: cd backend && (npm run start &) && cd ../frontend && (npm run serve &) && sleep 15 && npm run test:e2e
 
 
 
