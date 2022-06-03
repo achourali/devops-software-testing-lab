@@ -23,6 +23,7 @@ jobs:
           npm run test:e2e
 
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
