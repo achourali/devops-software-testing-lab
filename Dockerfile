@@ -9,4 +9,4 @@ WORKDIR /app
 EXPOSE 3000 3001
 RUN npm run build:frontend
 RUN npm run build
-CMD node dist/main.js
+CMD npm run start:prod
