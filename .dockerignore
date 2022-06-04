@@ -1,5 +1,6 @@
 .git
 .github
+.aws
 node_modules
 frontend/node_modules
 Dockerfile

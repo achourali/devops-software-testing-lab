@@ -7,4 +7,6 @@ WORKDIR /app/frontend
 RUN npm install
 WORKDIR /app
 EXPOSE 3000 3001
-CMD npm run build:frontend && npm run start
+RUN npm run build:frontend
+RUN npm run build
+CMD node dist/main.js
